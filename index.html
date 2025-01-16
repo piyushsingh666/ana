@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Roots and Prime Checker</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f4f4f4;
+      margin: 0;
+      padding: 20px;
+    }
+    h1 {
+      text-align: center;
+      color: #333;
+    }
+    .container {
+      max-width: 500px;
+      margin: 0 auto;
+      padding: 20px;
+      background: #fff;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      border-radius: 8px;
+    }
+    input {
+      width: calc(100% - 20px);
+      padding: 10px;
+      margin: 10px 0;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+    }
+    button {
+      width: 100%;
+      padding: 10px;
+      background-color: #007BFF;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    button:hover {
+      background-color: #0056b3;
+    }
+    .output {
+      margin-top: 20px;
+      padding: 10px;
+      background-color: #f8f9fa;
+      border: 1px solid #ddd;
+      border-radius: 5px;
+    }
+  </style>
+</head>
+
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-W0PHPXMKZG"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-W0PHPXMKZG');
+</script>
+
+<body>
+  <h1>Roots and Prime Checker</h1>
+  <div class="container">
+    <h3>Find Roots of a Quadratic Equation</h3>
+    <label>Enter coefficients a, b, c:</label>
+    <input type="number" id="a" placeholder="Coefficient a">
+    <input type="number" id="b" placeholder="Coefficient b">
+    <input type="number" id="c" placeholder="Coefficient c">
+    <button onclick="findRoots()">Find Roots</button>
+    <div class="output" id="rootsOutput"></div>
+
+    <h3>Check Prime Number</h3>
+    <label>Enter a number:</label>
+    <input type="number" id="primeInput" placeholder="Enter number">
+    <button onclick="checkPrime()">Check Prime</button>
+    <div class="output" id="primeOutput"></div>
+  </div>
+
+  <script>
+    // Function to find roots of a quadratic equation
+    function findRoots() {
+      const a = parseFloat(document.getElementById('a').value);
+      const b = parseFloat(document.getElementById('b').value);
+      const c = parseFloat(document.getElementById('c').value);
+
+      let output = document.getElementById('rootsOutput');
+      if (isNaN(a) || isNaN(b) || isNaN(c)) {
+        output.textContent = 'Please enter valid coefficients.';
+        return;
+      }
+
+      const discriminant = b * b - 4 * a * c;
+
+      if (discriminant > 0) {
+        const root1 = (-b + Math.sqrt(discriminant)) / (2 * a);
+        const root2 = (-b - Math.sqrt(discriminant)) / (2 * a);
+        output.textContent = `Roots are real and distinct: Root 1 = ${root1}, Root 2 = ${root2}`;
+      } else if (discriminant === 0) {
+        const root = -b / (2 * a);
+        output.textContent = `Roots are real and equal: Root = ${root}`;
+      } else {
+        const realPart = -b / (2 * a);
+        const imaginaryPart = Math.sqrt(-discriminant) / (2 * a);
+        output.textContent = `Roots are complex: ${realPart} ± ${imaginaryPart}i`;
+      }
+    }
+
+    // Function to check if a number is prime
+    function checkPrime() {
+      const num = parseInt(document.getElementById('primeInput').value);
+      let output = document.getElementById('primeOutput');
+
+      if (isNaN(num) || num < 2) {
+        output.textContent = 'Please enter a number greater than 1.';
+        return;
+      }
+
+      let isPrime = true;
+      for (let i = 2; i <= Math.sqrt(num); i++) {
+        if (num % i === 0) {
+          isPrime = false;
+          break;
+        }
+      }
+
+      output.textContent = isPrime
+        ? `${num} is a prime number.`
+        : `${num} is not a prime number.`;
+    }
+  </script>
+</body>
+</html>
+
+
